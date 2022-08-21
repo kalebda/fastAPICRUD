@@ -14,7 +14,7 @@ app = FastAPI()
 app.add_middleware(DBSessionMiddleware, db_url=os.environ["DATABASE_URL"])
 
 
-@app.get("/")
+@app.get("/",response_model=SchemaPhoneBook)
 async def get_phone_number():
     data = db.session.query(PhoneBook).order_by(PhoneBook.lastname.asc())
     return {"data": data}
